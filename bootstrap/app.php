@@ -12,7 +12,17 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\EnsureIsAdmin::class,
+            // ... other middleware aliases
+        ]);
+
+        $middleware->web([
+            // ... existing web middleware
+            \App\Http\Middleware\EnsureIsAdmin::class,
+             \Illuminate\Routing\Middleware\ThrottleRequests::class.':login',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
