@@ -20,8 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web([
             // ... existing web middleware
-            \App\Http\Middleware\EnsureIsAdmin::class,
-             \Illuminate\Routing\Middleware\ThrottleRequests::class.':login',
+            // \App\Http\Middleware\EnsureIsAdmin::class,
+            //  \Illuminate\Routing\Middleware\ThrottleRequests::class.':login',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -15,17 +15,11 @@ class EnsureIsAdmin
      */
     public function handle(Request $request, Closure $next): Response
     {
-       if (!auth()->check()) {
-        return $request->expectsJson()
-            ? response()->json(['message' => 'Unauthenticated'], 401)
-            : redirect()->route('login');
-    }
+        if (!auth()->check() || auth()->user()->role !== 'admin') {
+            abort(403, 'Unauthorized: Admin access required.');
+        }
 
-    if (auth()->user()->role !== 'admin') {
-        return $request->expectsJson()
-            ? response()->json(['message' => 'Unauthorized'], 403)
-            : redirect('/')->with('error', 'Unauthorized access');
-    }
+         return $next($request);
 
     }
 }
