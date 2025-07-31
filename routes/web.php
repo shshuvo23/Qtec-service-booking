@@ -14,9 +14,6 @@ Route::get('/test-route', function () {
 });
 
 
-
-
-
 Route::get('/', function () {
     return redirect('/login');
 });
