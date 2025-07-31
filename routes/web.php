@@ -13,6 +13,10 @@ Route::get('/test-route', function () {
     return 'Test route works';
 });
 
+
+
+
+
 Route::get('/', function () {
     return redirect('/login');
 });
